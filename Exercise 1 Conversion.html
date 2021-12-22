@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>First Exercise</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+<div class="row">
+    <div class="col-sm-8">
+        <div class="card">
+            <div class="card-header">Temperature in Celsius</div>
+            <div class="card-body">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" id="inputText" aria-describedby="textHelp"
+                           placeholder="Enter text" aria-label="Enter text" required>
+                </div>
+                <button type="button" onclick="calculate()">Convert</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-8">
+        <div class="card">
+            <div class="card-header">
+                Converted to Fahrenheit <p id="result"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-8">
+        <div class="card">
+            <div class="card-header">Temperature in Fahrenheit</div>
+            <div class="card-body">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" id="inputText2" aria-describedby="textHelp"
+                           placeholder="Enter text" aria-label="Enter text" required>
+                </div>
+                <button type="button" onclick="calculate2()">Convert</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-8">
+        <div class="card">
+            <div class="card-header">
+                Converted to Celsius <p id="result2"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    var input = document.querySelector('#inputText');
+
+    input.addEventListener('input', function () {
+        calculate();
+    });
+    function calculate() {
+        str = document.getElementById("inputText").value
+        if (window.XMLHttpRequest) {
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function () {
+            console.log(xmlhttp.responseText);
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("result").innerHTML = xmlhttp.responseText;
+            }
+        }
+        xmlhttp.open("POST", `https://ip-uacs.herokuapp.com/api/Convert/ToFahrenheit/${str}` , true);
+        xmlhttp.send();
+    }
+</script>
+
+<script type="text/javascript">
+    var input = document.querySelector('#inputText2');
+
+    input.addEventListener('input', function () {
+        calculate2();
+    });
+    function calculate2() {
+        str = document.getElementById("inputText2").value
+        if (window.XMLHttpRequest) {
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function () {
+            console.log(xmlhttp.responseText);
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("result2").innerHTML = xmlhttp.responseText;
+            }
+        }
+        xmlhttp.open("POST", `https://ip-uacs.herokuapp.com/api/Convert/ToCelsius/${str}` , true);
+        xmlhttp.send();
+    }
+</script>
+
+
+
+</body>
+</html>

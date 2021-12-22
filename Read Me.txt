@@ -1,0 +1,5 @@
+For the Student Class i used the application from lecture 12, but commented out the cars
+and replaced the drone class with student and from then on posted and had the info page for them. 
+The exercises 1-3 are marked as 1, 2 and Table for the Listed Table.
+
+Also i added most of the js files from the application 12 folder just in case.
